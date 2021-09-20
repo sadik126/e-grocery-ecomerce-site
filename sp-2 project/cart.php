@@ -16,8 +16,14 @@ include 'config.php';
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<style >
+  body{
+    min-height: 100vh;
+  }
+</style>
+<body >
 <body>
-	<div class="container">
+	<div class="container" style="min-height: 85vh;">
 		<div class="row justify-content-center">
     <div class="col-lg-10" >
        <div style="display:<?php if(isset($_SESSION['showAlert'])){echo $_SESSION['showAlert'];}else {echo'none';}unset($_SESSION['showAlert']);?>" class="alert alert-success alert-dismissible mt-3">

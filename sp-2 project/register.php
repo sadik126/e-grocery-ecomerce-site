@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
  // }
 
   // $con=mysqli_connect("localhost","root","","egrocery");
-  $existSql = "select * from customers where username = '$username'";
+  $existSql = "select * from admin where username = '$username'";
 
   $result = mysqli_query($con,$existSql);
   $numExistRows = mysqli_num_rows($result);
@@ -53,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
    if(($password==$cpassword) )
   {
 
-    $sql="insert into customers(name,email,username,dateofbirth,password,gender) value ('$name','$email','$username','$dateofbirth','$password','$gender')";
+    $sql="insert into admin(name,email,username,dateofbirth,password,gender) value ('$name','$email','$username','$dateofbirth','$password','$gender')";
     $result = mysqli_query($con,$sql);
 
     if($result)
@@ -137,8 +137,8 @@ echo'<div class="alert alert-danger" role="alert">
   
   
   
-<div class="container-fluid bg-primary text-light py-3">
-    <h1 align="center" style="font-family: 'Zen Dots', cursive;">WELCOME TO REGESTRATION</h1>
+<div class="container-fluid  text-light py-3" style="background-color:#926d3e;">
+    <h1 align="center" style="font-family: 'Zen Dots', cursive;">REGISTER AS A ADMIN</h1>
 
 
 
@@ -147,7 +147,7 @@ echo'<div class="alert alert-danger" role="alert">
   
   <form method="POST" action="" name="myform" style="min-height: 70vh;" onsubmit="return validateForm()">
     <fieldset>
-    <legend align="center" style="font-size: 2.0em; font-family: 'Zen Dots', cursive;">Fill Up the Form Carefully</legend>
+    <legend align="center" style="font-size: 2.0em; font-family: 'Zen Dots', cursive;">Fill Up this Form</legend>
 
    
     
@@ -220,10 +220,10 @@ echo'<div class="alert alert-danger" role="alert">
   </table>
 
 
-
-  
+<div align="center">
+   <span class="psw" > <a style="text-decoration: none;" href="adminlogin.php"> <span style="color: whitesmoke; padding: 5px 5px; font-size:20px;">Login as Admin</span></a></span>
     
-
+</div>
 
     
 

@@ -1,5 +1,3 @@
-
-
 <?php include 'header.php' ?>
 
 <!DOCTYPE html>
@@ -7,17 +5,18 @@
 <head>
     <title>PHP Form Validation</title>
     <link rel="stylesheet" type="text/css" href="regestration.css">
-     <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
 
 </head>
-<style >
-  body{
+
+
+  <style>
+    body{
     min-height: 100vh;
   }
-</style>
-<body >
+  </style>
+  <body>
 
 
 
@@ -40,23 +39,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
   
 
-    $sql="select * from customers where username='$username'and password='$password'";
+    $sql="select * from admin where username='$username'and password='$password'";
     $result = mysqli_query($con,$sql);
     $num = mysqli_num_rows($result);
 
     if($num > 0){
 
       $login =  true;
+      session_start();
+      $_SESSION['admin']=true;
+       $_SESSION['usernameadmin']=$username;
+      header("location:admin.php");
+
       
-    if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
-      $_SESSION['loggedin']=true;
-      $_SESSION['id'] = $num['id'];
-      $_SESSION['username']= $username;
-      header("location:home.php");
-}
+    }
   
   else
   {
@@ -69,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   
 ?>
   <?php
-   if($login)
+  if($login)
 {
 echo'<div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Well done!</h4>
@@ -87,13 +83,15 @@ echo'<div class="alert alert-danger" role="alert">
   <p class="mb-0">Please try again.</p>
 </div>';
 }
- if($login)   
+
+   
+    if($login)   
   {  
    if(!empty($_POST["remember"]))   
    {  
     setcookie ("member_login",$username,time()+ (10 * 365 * 24 * 60 * 60));  
     setcookie ("member_password",$password,time()+ (10 * 365 * 24 * 60 * 60));
-    $_SESSION["usernamecus"] = $username;
+    $_SESSION["usernameadmin"] = $username;
    }  
    else  
    {  
@@ -106,33 +104,39 @@ echo'<div class="alert alert-danger" role="alert">
      setcookie ("member_password","");  
     }  
    }  
-   header("location:home.php"); 
+   header("location:admin.php"); 
   }  
-  ?>
-
-
-
-  <div class="container-fluid bg-dark text-light py-3">
-  <h1 style="text-align:center; padding-top: 45px;   ">Login Here</h1>
   
-  <form method="POST" action="" name="myform" style="min-height: 65vh;"  onsubmit="return validateForm()" >
+
+
+
+
+
+?>
+
+
+
+  <div class="container-fluid bg-light text-dark py-3">
+  <h1 style="text-align:center; padding-top: 45px;">Login Here As Admin</h1>
+  
+  <form method="POST" action="" name="myform" style="min-height: 65vh;" onsubmit="return validateForm()" >
     <fieldset>
-    <legend align="center" style="font-size: 2.0em">Welcome to Login</legend>
+    <legend align="center" style="font-size: 2.0em">Welcome to ADMIN PANEL</legend>
 
    <table cellpadding="2" width="40%"  align="center"cellspacing="10">
     <tr id="username">
       <td><b>USERNAME</b></td>
       <td>
-        <input type="text" id="username" name="username" size="30" style="border-radius: 6px;"  value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>"><br>
-        <b><span style="color: whitesmoke; font-size:15px;" class="formerror"></span></b>
+        <input type="text" id="username" name="username" size="30" style="border-radius: 6px;"  value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>">
+        <b><span style="color: red;" class="formerror"></span></b>
       </td>
     </tr>
 
     <tr id="password">
       <td><b>PASSWORD</b></td>
       <td>
-        <input type="text" id="password" name="password" size="30" style="border-radius: 6px;" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>"><br>
-        <b><span style="color: whitesmoke; font-size: 15px;" class="formerror"></span></b>
+        <input type="text" id="password" name="password" size="30" style="border-radius: 6px;" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>">
+        <b><span style="color: red;" class="formerror"></span></b>
       </td>
 
     </tr>
@@ -152,7 +156,7 @@ echo'<div class="alert alert-danger" role="alert">
    
        <tr>
           <td></td>
-          <td><input style="background-color: orangered;color: white;padding: 10px 50px; font-size: 16px; border-radius:15px; font-family: 'Ubuntu Mono', monospace; font-size:20px; " type="Submit" name="submit" value="Login"></td>
+          <td><input style="background-color: greenyellow;color: black;padding: 10px 50px; font-size: 16px; border-radius:15px; font-family: 'Ubuntu Mono', monospace; font-size:20px; " type="Submit" name="submit" value="Login"></td>
         </tr>
 
         
@@ -165,17 +169,9 @@ echo'<div class="alert alert-danger" role="alert">
        <div  align="center">
 
     
-    <span class="psw" > <a style="text-decoration: none;" href="adminlogin.php"> <span style="color: whitesmoke; padding: 5px 5px;">Login as Admin</span></a></span>
-    <span class="psw" > <a style="text-decoration: none;" href="forgetpass.php"> <span style="color: ghostwhite; padding: 5px 5px;">Forgot password?</span></a></span>
-   </div>
-
-
-        
-    </div>
-      <div  align="center">
-
-    
     <span class="psw" > <a style="text-decoration: none;" href="forgetpass.php"> <span style="color: #ff0000; padding: 5px 5px;">Forgot password?</span></a></span>
+    <br>
+     <span class="psw" > <a style="text-decoration: none;" href="register.php"> <span style="color: #ff0000; padding: 5px 5px;">Dont have a account?Register here </span></a></span>
    </div>
 
 
@@ -183,9 +179,7 @@ echo'<div class="alert alert-danger" role="alert">
     </div>
 </fieldset>
 </form>
-
 <br>
-
 <script >
 
   function clearErrors(){
@@ -230,9 +224,7 @@ echo'<div class="alert alert-danger" role="alert">
 
 
 
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script> 
 </body>
 </html>
-
 
 <?php include 'footer.php' ?>
