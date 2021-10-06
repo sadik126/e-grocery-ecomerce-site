@@ -75,10 +75,10 @@
 }
 
   if(isset($_GET['cut'])){
-	$name = $_GET['cut'];
+	$id = $_GET['cut'];
 
-	$stmt=$con->prepare("Delete From orders WHERE name=?");
-	$stmt->bind_param("s",$name);
+	$stmt=$con->prepare("Delete From orders WHERE id=?");
+	$stmt->bind_param("i",$id);
 	$stmt->execute();
 
 	// $_SESSION['showAlert']='block';

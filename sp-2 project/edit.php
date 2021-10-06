@@ -24,6 +24,15 @@ if(!isset($_SESSION['admin']) || $_SESSION['admin']!=true){
    include 'sidebar.html'; 
    include 'config.php';
 ?>
+
+
+<?php
+include 'config.php';
+  $msql="select * from admin where username='$_SESSION[usernameadmin]'";
+  $result = mysqli_query($con,$msql);
+  while($row=mysqli_fetch_assoc($result)){
+
+echo'
  <form method="POST" action="" name="myform" onsubmit="return validateForm()">
      <h1 align="center">EDIT YOUR PROFILE</h1>
     
@@ -36,14 +45,14 @@ if(!isset($_SESSION['admin']) || $_SESSION['admin']!=true){
     <tr id="name">
       <td>NAME</td>
       <td>
-        <input type="text" maxlength="15" name="name" size="30"  style="border-radius: 7px;"><b><span style="color: red;" class="formerror"></span></b>
+        <input type="text" maxlength="15" name="name" size="30" value="'.$row['name'].'"  style="border-radius: 7px;"><b><span style="color: red;" class="formerror"></span></b>
       </td>
     </tr>
 
     <tr id="email">
       <td>EMAIL</td>
       <td>
-        <input type="text" name="email" size="30" style="border-radius: 7px;"><b><span style="color: red;" class="formerror"></span></b>
+        <input type="text" name="email" size="30" value="'.$row['email'].'" style="border-radius: 7px;"><b><span style="color: red;" class="formerror"></span></b>
       </td>
     </tr>
 
@@ -51,14 +60,14 @@ if(!isset($_SESSION['admin']) || $_SESSION['admin']!=true){
     <tr id="username">
       <td>USERNAME</td>
       <td>
-        <input type="text" maxlength="20" name="username" size="30"style="border-radius: 7px;"><b><span style="color: red;" class="formerror"></span></b>
+        <input type="text" maxlength="20" name="username" value="'.$row['username'].'" size="30"style="border-radius: 7px;"><b><span style="color: red;" class="formerror"></span></b>
       </td>
     </tr>
 
     <tr id="date">
       <td>DATE OF BIRTH</td>
       <td>
-        <input type="Date" name="date" size="30" min="1953-01-01" max="1999-01-01" style="border-radius: 7px;padding: 2px 60px;"><b><span style="color: red;" class="formerror"></span></b>
+        <input type="Date" name="date" size="30" min="1953-01-01" max="1999-01-01" value="'.$row['dateofbirth'].'" style="border-radius: 7px;padding: 2px 60px;"><b><span style="color: red;" class="formerror"></span></b>
       </td>
     </tr>
 
@@ -66,7 +75,7 @@ if(!isset($_SESSION['admin']) || $_SESSION['admin']!=true){
     <tr id="password">
       <td>PASSWORD</td>
       <td>
-        <input type="text" name="password" size="30" style="border-radius: 7px;"><b><span style="color: red;" class="formerror"></span></b>
+        <input type="text" name="password" size="30" value="'.$row['password'].'" style="border-radius: 7px;"><b><span style="color: red;" class="formerror"></span></b>
       </td>
     </tr> 
 
@@ -75,7 +84,7 @@ if(!isset($_SESSION['admin']) || $_SESSION['admin']!=true){
 
     <tr id="gender">
       <td>GENDER</td>
-      <td><input type="radio" name="gender" value="Male" size="30" >Male
+      <td><input type="radio" name="gender" value="Male" checked="'.$row['gender'].'" size="30" >Male
       <input type="radio" name="gender" value="Female" size="30" >Female
       <input type="radio" name="gender" value="Other" size="30" >Other
        
@@ -88,14 +97,14 @@ if(!isset($_SESSION['admin']) || $_SESSION['admin']!=true){
     
         <tr>
           <td></td>
-          <td><input style="background-color: #277b8e;color: white;padding: 10px 28px; font-size: 16px; border-radius:15px;font-family: 'Zen Dots', cursive; " type="Submit" name="updatedata" value="EDIT PROFILE"></td>
+          <td><input style="background-color: #277b8e;color: white;padding: 10px 28px; font-size: 16px; border-radius:15px;" type="Submit" name="updatedata" value="EDIT PROFILE"></td>
         </tr>
       
   </table>
 </form>
-</div>
+</div>';}
 
- 
+ ?>
 
 
   <?php
@@ -106,8 +115,8 @@ if(!isset($_SESSION['admin']) || $_SESSION['admin']!=true){
     $run=mysqli_query($con,$sql);
     if($run)
     {
-      // echo'<script>alert("data updated")</script>';
-      echo "data updated";
+       echo'<script>alert("data updated")</script>';
+      //echo "data updated";
     }
     else
     {

@@ -64,28 +64,27 @@ session_start();
 		<div class="card">
 			<div class="card-header bg-light">
 
-				<h1 class="text-dark text-center "> Orders</h1>
+				<h1 class="text-dark text-center "> Delivered</h1>
 				<br>
 				<div class="container">
 				    <div class="col-lg-12 ">
 
 				      <table class="table table-striped table-hover table-bordered ">
-				      	<tr class="bg-primary text-light text-center">
+				      	<tr class="bg-success text-light text-center">
 				      		<th>Name</th>
-				      		<th>Id</th>
 			               <th>phone</th>
 			               <th>Address</th>
 			               <th>Payment mode</th>
 			               <th>Products</th>
 			               <th>Amount paid</th>
-				      		<th >Delete</th >
-				      		<th >Deliver</th >
+				      		<th >Product id</th >
+				      		<th >Time</th >
 				      		<th>Status</th>
 
 				      	</tr>
                         <?php
                          include 'config.php';
-                         $query= "select * from orders";
+                         $query= "select * from delivery";
                          $result =mysqli_query($con,$query);
                          while($row=mysqli_fetch_assoc($result)){
                         echo '
@@ -98,19 +97,17 @@ session_start();
                         
 				          <tr class="text-center">
 				      		 <th>'.$row["name"].'</th>
-				      		  <th>'.$row["id"].'</th>
-
 				      		<th>'.$row["phone"].'</th>
 				      		<th>'.$row["address"].'</th>
 				      		<th>'.$row["pmode"].'</th>
 				      		<th>'.$row["products"].'</th>
 				      		<th>'.$row["amount_paid"].'</th>
+				      		<th>'.$row["product_id"].'</th>
+				      		<th>'.$row["datetime"].'</th>
 				      		
-				      		<th><button class="btn btn-danger"><a href="action.php?cut='.$row["id"].'" style="color: white;" >Delete</a></button></th>
+				      		
 
-				      		<th><button class="btn btn-success"><a href="deliverd.php?name='.$row["name"].'" style="color: white;" >Deliver</a></button></th>
-
-				      		<th><button class="btn btn-warning">Pending</a></button></th>
+				      		<th><button class="btn btn-warning">Delivered</a></button></th>
 				      	</tr>';
 				         };
 				      	?>

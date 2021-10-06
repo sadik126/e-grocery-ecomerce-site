@@ -1,29 +1,25 @@
 
 
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>orders</title>
+	<title></title>
 </head>
 <body>
-
 	<?php
+	include 'header.php';
+	 error_reporting(0);
 
-	include"header.php";
-
-
- error_reporting(0);
 	?>
+
+
 
 	<div class="col-lg-8 m-auto"  style="min-height: 85vh;">
  	<div class="card">
  		<div class="card-header bg-light">
 
- 			<h1 class="text-dark text-center  bg-danger"><b> MY ORDERS</b></h1>
+ 			<h1 class="text-dark text-center  bg-warning"><b> History</b></h1>
 
  			<br>
  			<div class="container">
@@ -34,7 +30,7 @@
           
                      include"config.php";
                        //$_SESSION['username']= $username;
-                      $sql="select * from orders where name='$_SESSION[username]'";
+                      $sql="select * from delivery where name='$_SESSION[username]'";
                       $result = mysqli_query($con,$sql);
                        $num = mysqli_num_rows($result);
                       if($num>0 ){
@@ -56,13 +52,17 @@
 				      		 <br>
 				      		 <td><b> Payment:</b>&nbsp;&nbsp;&nbsp; '.$row["amount_paid"].'</td>
 				      		 <br>
-                   <td><b> Date and Time:</b>&nbsp;&nbsp;&nbsp; '.$row["time"].'</td>
+                   <td><b> Date and Time:</b>&nbsp;&nbsp;&nbsp; '.$row["datetime"].'</td>
 				      		 <br>
-                   <td><b> Status:</b>&nbsp;&nbsp;&nbsp;  processing</td>
+				      		 <td><b> Product id:</b>&nbsp;&nbsp;&nbsp; '.$row["product_id"].'</td>
+				      		 <br>
+                   <td><b> Status:</b>&nbsp;&nbsp;&nbsp;  Delivered</td>
 				      		 <br>
                    <br>
 				      		
-				      		<td><button class="btn btn-success"><a href="action.php?dil='.$row["products"].'" style="color: white;" >Delete orders</a></button></td>
+				      		
+				      		<br>
+				      		<br>
 				      		<br>
 				      	</tr>
                         
@@ -74,8 +74,8 @@
 
                   else
                   	 echo'<div class="container">
-        <h1 class="py-2" id="ques">Sorry.you could not see your orders</h1>
-        <p class="lead"> You are not logged in.please login to see your orders</p>
+        <h1 class="py-2" id="ques">Sorry.you could not see your history</h1>
+        <p class="lead"> There is something error</p>
         </div>';
 
  					?>
@@ -144,7 +144,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 
-<?php
-include"footer.php";
+
+	
+
+</body>
+</html>
+
+<?php 
+ include'footer.php';
 
 ?>

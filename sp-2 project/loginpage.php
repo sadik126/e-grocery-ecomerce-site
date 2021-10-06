@@ -1,6 +1,9 @@
 
 
-<?php include 'header.php' ?>
+<?php include 'header.php' 
+
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -17,11 +20,10 @@
     min-height: 100vh;
   }
 </style>
-<body >
-
-
-
+<body 
 <?php 
+
+
 
 $login = false;
 $showerror = false;
@@ -35,10 +37,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   
   $password=$_POST["password"];
  
- 
-  
-
-  
 
     $sql="select * from customers where username='$username'and password='$password'";
     $result = mysqli_query($con,$sql);
@@ -47,10 +45,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if($num > 0){
 
       $login =  true;
+      //header("location:home.php");
       
     if(!isset($_SESSION)) 
     { 
-        session_start(); 
+        session_start();
+
     } 
       $_SESSION['loggedin']=true;
       $_SESSION['id'] = $num['id'];
@@ -68,10 +68,17 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 }
   
 ?>
+
+
   <?php
    if($login)
 {
-echo'<div class="alert alert-success" role="alert">
+echo'
+ <script >
+  
+  window.location.href="home.php";
+</script>
+<div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Well done!</h4>
   <p>You are logged in</p>
   <hr>
@@ -93,7 +100,7 @@ echo'<div class="alert alert-danger" role="alert">
    {  
     setcookie ("member_login",$username,time()+ (10 * 365 * 24 * 60 * 60));  
     setcookie ("member_password",$password,time()+ (10 * 365 * 24 * 60 * 60));
-    $_SESSION["usernamecus"] = $username;
+    $_SESSION["username"] = $username;
    }  
    else  
    {  
@@ -131,7 +138,7 @@ echo'<div class="alert alert-danger" role="alert">
     <tr id="password">
       <td><b>PASSWORD</b></td>
       <td>
-        <input type="text" id="password" name="password" size="30" style="border-radius: 6px;" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>"><br>
+        <input type="password" id="password" name="password" size="30" style="border-radius: 6px;" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>"><br>
         <b><span style="color: whitesmoke; font-size: 15px;" class="formerror"></span></b>
       </td>
 

@@ -49,9 +49,19 @@ include 'header.php';
 
 <?php
 
-// include'sidebar.html';
+  include 'config.php';
+  $msql="select * from customers where username='$_SESSION[username]'";
+  $result = mysqli_query($con,$msql);
+  while($row=mysqli_fetch_assoc($result)){
 
-?>
+  $username = $row['username'];
+
+ };
+ ?>
+
+
+
+
 
 <div class="container" style="min-height: 85vh;">
 	<div class="row justify-content-center">
@@ -64,17 +74,19 @@ include 'header.php';
 				<form action="" method="post" id="placeorder"   >
 					<input type="hidden" name="products" value="<?=$allItems; ?>">
 					<input type="hidden" name="grand_total" value="<?=$grand_total; ?>">
+					<h6 class="text-center lead">Your name</h6>
 					<div class="form-grup">
-						<input type="name" name="name" class="form-control"  placeholder="Enter your name" required="1" >
+						<input type="name" name="name" class="form-control" value="<?=$username; ?>"  placeholder="Enter your name" required="1" >
 					</div>
-
+           <h6 class="text-center lead">Enter your phone number</h6>
 					<div class="form-grup">
 						<input type="text" name="phone" class="form-control"  placeholder="Enter your number" required="1">
 					</div>
-					
+					<h6 class="text-center lead">Enter your address</h6>
 					<div class="form-grup">
 						<textarea name="address"  class="form-control" rows="3" cols="12" placeholder="Enter your address" required="1" >
 					    </textarea>
+					  </div>
 					    <h6 class="text-center lead">Select payment mode</h6>
 					    <div class="form-grup">
 					    	<select name="pmode" class="form-control" required="1">
@@ -105,6 +117,7 @@ include 'header.php';
 	</div>
 </div>
 </body>
+
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

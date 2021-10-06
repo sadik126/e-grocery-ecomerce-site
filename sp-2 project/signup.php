@@ -273,14 +273,25 @@ echo'<div class="alert alert-danger" role="alert">
 		var returnval = true;
 		clearErrors();
 		var name = document.forms['myform']['name'].value;
+   
 		if(name.length<5){
 			seterror("name","*Length of name is too short");
 			returnval= false;
 		}
+   
 		if(name.length==0){
 			seterror("name","*Please fill up the name");
 			returnval= false;
 		}
+    var correct = /^[A-Za-z]+$/;
+    if(name.match(correct)){
+      returnval=true;
+    }
+    else
+    {
+      seterror("name","*Only alphabets are allowed");
+      returnval= false;
+    }
 		var email = document.forms['myform']['email'].value;
     
     var pattern =   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;

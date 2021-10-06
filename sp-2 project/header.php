@@ -1,5 +1,6 @@
 <?php
 session_start();
+//error_reporting(0);
 //$_SESSION['customer']=true;
 
 ?>
@@ -63,9 +64,15 @@ echo ' </div>
       <li class="nav-item active">
         <a class="nav-link" href="products.php" style="color: red;">Top brands</a>
       </li>
-      <li class="nav-item active">
+        <li class="nav-item active">
         <a class="nav-link" href="myorder.php">Orders</a>
       </li>
+       <li class="nav-item active">
+        <a class="nav-link" href="history.php">History</a>
+      </li>
+
+     </ul>
+    
      
     </ul>';
 
@@ -73,8 +80,17 @@ echo ' </div>
       
      if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
 
-      echo' <form class="form-inline my-2 my-lg-0" action=find.php method=get>
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      echo' 
+
+      
+    
+
+
+
+
+
+      <form class="form-inline my-2 my-lg-0" action="find.php" method="GET">
+      <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       <p class="text-dark my-0 mx-2">welcome <a href="userprofile.php"> '.$_SESSION['username'].'</a></p>
       
@@ -84,13 +100,15 @@ echo ' </div>
       <button type="button" class="btn btn-danger my-2 mx-3"><a href="logout.php?clear=all"style="color:#ffcccb;text-decoration:none">LOGOUT</a></button>
       
     </form>
+
  ';
 
      }
 
      else{
-      echo'<form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      echo'
+      <form class="form-inline my-2 my-lg-0" action="find.php" method="GET">
+      <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       <button type="button" class="btn btn-danger my-2 mx-3"><a href="loginpage.php"style="color:#ffcccb;text-decoration:none">LOGIN</a></button>
       <button type="button" class="btn btn-warning my-2"><a href="signup.php"style="color:black;text-decoration:none">SIGN UP</a></button>
